@@ -1,0 +1,30 @@
+{
+  "name": "terradeck-wasm",
+  "type": "module",
+  "collaborators": [
+    "Karim Lalani <jimmy00784@gmail.com>"
+  ],
+  "description": "WebAssembly renderer for Terra-Deck using HTML5 Canvas 2D API",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lalanikarim/terra-deck"
+  },
+  "files": [
+    "terradeck_wasm_bg.wasm",
+    "terradeck_wasm.js",
+    "terradeck_wasm.d.ts"
+  ],
+  "main": "terradeck_wasm.js",
+  "types": "terradeck_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ],
+  "keywords": [
+    "wasm",
+    "browser",
+    "webassembly",
+    "game"
+  ]
+}
