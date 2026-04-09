@@ -25,12 +25,12 @@ export interface InitOutput {
     readonly canvasapplication_new: (a: number, b: number) => [number, number, number];
     readonly canvasapplication_on_keydown: (a: number, b: any) => void;
     readonly canvasapplication_on_mousedown: (a: number, b: any) => void;
-    readonly canvasapplication_on_mouseup: (a: number, b: any) => void;
     readonly canvasapplication_render: (a: number) => void;
     readonly canvasapplication_reset_game: (a: number) => void;
     readonly canvasapplication_run: (a: number) => void;
     readonly canvasapplication_update_attack_button: (a: number) => void;
     readonly canvasapplication_on_mousemove: (a: number, b: any) => void;
+    readonly canvasapplication_on_mouseup: (a: number, b: any) => void;
     readonly __externref_table_alloc: () => number;
     readonly __wbindgen_externrefs: WebAssembly.Table;
     readonly __wbindgen_exn_store: (a: number) => void;
