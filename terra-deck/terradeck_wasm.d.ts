@@ -13,6 +13,7 @@ export class CanvasApplication {
     render(): void;
     reset_game(): void;
     run(): void;
+    update(_delta_time: number): void;
     update_attack_button(): void;
 }
 
@@ -28,6 +29,7 @@ export interface InitOutput {
     readonly canvasapplication_render: (a: number) => void;
     readonly canvasapplication_reset_game: (a: number) => void;
     readonly canvasapplication_run: (a: number) => void;
+    readonly canvasapplication_update: (a: number, b: number) => void;
     readonly canvasapplication_update_attack_button: (a: number) => void;
     readonly canvasapplication_on_mousemove: (a: number, b: any) => void;
     readonly canvasapplication_on_mouseup: (a: number, b: any) => void;

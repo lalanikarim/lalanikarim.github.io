@@ -61,6 +61,12 @@ export class CanvasApplication {
     run() {
         wasm.canvasapplication_run(this.__wbg_ptr);
     }
+    /**
+     * @param {number} _delta_time
+     */
+    update(_delta_time) {
+        wasm.canvasapplication_update(this.__wbg_ptr, _delta_time);
+    }
     update_attack_button() {
         wasm.canvasapplication_update_attack_button(this.__wbg_ptr);
     }
