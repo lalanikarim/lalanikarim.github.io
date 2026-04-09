@@ -11,6 +11,9 @@ export class CanvasApplication {
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_canvasapplication_free(ptr, 0);
     }
+    execute_attack() {
+        wasm.canvasapplication_execute_attack(this.__wbg_ptr);
+    }
     /**
      * @param {string} canvas_id
      */
@@ -52,8 +55,14 @@ export class CanvasApplication {
     render() {
         wasm.canvasapplication_render(this.__wbg_ptr);
     }
+    reset_game() {
+        wasm.canvasapplication_reset_game(this.__wbg_ptr);
+    }
     run() {
         wasm.canvasapplication_run(this.__wbg_ptr);
+    }
+    update_attack_button() {
+        wasm.canvasapplication_update_attack_button(this.__wbg_ptr);
     }
 }
 if (Symbol.dispose) CanvasApplication.prototype[Symbol.dispose] = CanvasApplication.prototype.free;
@@ -96,6 +105,16 @@ function __wbg_get_imports() {
             const ret = result;
             return ret;
         },
+        __wbg_instanceof_HtmlButtonElement_94e31ca453766121: function(arg0) {
+            let result;
+            try {
+                result = arg0 instanceof HTMLButtonElement;
+            } catch (_) {
+                result = false;
+            }
+            const ret = result;
+            return ret;
+        },
         __wbg_instanceof_HtmlCanvasElement_3cec11b30b0d54e4: function(arg0) {
             let result;
             try {
@@ -132,8 +151,11 @@ function __wbg_get_imports() {
             const ret = arg0.performance;
             return ret;
         },
-        __wbg_set_fillStyle_e3dd32dc576b3226: function(arg0, arg1) {
-            arg0.fillStyle = arg1;
+        __wbg_set_disabled_62d4bb104354648a: function(arg0, arg1) {
+            arg0.disabled = arg1 !== 0;
+        },
+        __wbg_set_fillStyle_06ca63831e299ec6: function(arg0, arg1, arg2) {
+            arg0.fillStyle = getStringFromWasm0(arg1, arg2);
         },
         __wbg_set_font_1cb7225ed52d9f14: function(arg0, arg1, arg2) {
             arg0.font = getStringFromWasm0(arg1, arg2);
@@ -141,8 +163,11 @@ function __wbg_get_imports() {
         __wbg_set_height_26ab95ff99e2b620: function(arg0, arg1) {
             arg0.height = arg1 >>> 0;
         },
-        __wbg_set_strokeStyle_576614e9e6cb4a62: function(arg0, arg1) {
-            arg0.strokeStyle = arg1;
+        __wbg_set_lineWidth_b403909aac47bdf0: function(arg0, arg1) {
+            arg0.lineWidth = arg1;
+        },
+        __wbg_set_strokeStyle_86e8cc93fb4bd2db: function(arg0, arg1, arg2) {
+            arg0.strokeStyle = getStringFromWasm0(arg1, arg2);
         },
         __wbg_set_width_81fa781e87b17891: function(arg0, arg1) {
             arg0.width = arg1 >>> 0;

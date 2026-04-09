@@ -32,6 +32,55 @@
             font-size: 24px;
             color: #ffff00;
         }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        #attack-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: all 0.2s;
+        }
+        #attack-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+        #attack-btn:active {
+            transform: translateY(0);
+        }
+        #attack-btn:disabled {
+            background: #555;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+        }
+        #reset-btn {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: all 0.2s;
+        }
+        #reset-btn:hover {
+            background: #d32f2f;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -40,24 +89,46 @@
     </div>
     <div id="loading">Loading...</div>
 
-    <script type="module">
-        import { CanvasApplication } from './terradeck_wasm.js';
+    <div id="controls">
+        <button id="attack-btn" disabled>⚔️ ATTACK</button>
+        <button id="reset-btn">🔄 Reset</button>
+    </div>
 
-        async function init() {
+    <script type="module">
+        import init, { CanvasApplication } from './terradeck_wasm.js';
+
+        async function initGame() {
+            await init();
+            
             try {
                 document.getElementById('loading').style.display = 'none';
                 const app = new CanvasApplication('game-canvas');
                 app.run();
                 
-                // Setup event handlers
                 const canvas = document.getElementById('game-canvas');
                 canvas.addEventListener('mousedown', (e) => app.on_mousedown(e));
                 canvas.addEventListener('keydown', (e) => app.on_keydown(e));
                 canvas.addEventListener('mousemove', (e) => app.on_mousemove(e));
                 canvas.addEventListener('mouseup', (e) => app.on_mouseup(e));
                 
-                console.log('Terra-Deck WASM initialized successfully!');
-                console.log('Click your cards to attack!');
+                // Attack button
+                const attackBtn = document.getElementById('attack-btn');
+                attackBtn.addEventListener('click', () => {
+                    app.execute_attack();
+                    app.update_attack_button();
+                });
+                
+                // Reset button
+                const resetBtn = document.getElementById('reset-btn');
+                resetBtn.addEventListener('click', () => {
+                    app.reset_game();
+                });
+                
+                // Expose functions to global scope for HTML buttons
+                window.terradeck_app = app;
+                
+                console.log('Terra-Deck WASM initialized!');
+                console.log('Gameplay: Select player card → Select opponent card → Click ATTACK');
             } catch (err) {
                 console.error('Failed to initialize:', err);
                 document.getElementById('loading').textContent = 'Error loading game';
@@ -65,7 +136,7 @@
             }
         }
 
-        init();
+        initGame();
     </script>
 </body>
 </html>
