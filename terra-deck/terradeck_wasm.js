@@ -135,6 +135,9 @@ function __wbg_get_imports() {
             const ret = result;
             return ret;
         },
+        __wbg_log_b1898a1636986dad: function(arg0, arg1) {
+            console.log(getStringFromWasm0(arg0, arg1));
+        },
         __wbg_now_e7c6795a7f81e10f: function(arg0) {
             const ret = arg0.now();
             return ret;

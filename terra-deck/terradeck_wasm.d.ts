@@ -4,13 +4,16 @@
 export class CanvasApplication {
     free(): void;
     [Symbol.dispose](): void;
+    execute_attack(): void;
     constructor(canvas_id: string);
     on_keydown(_e: KeyboardEvent): void;
     on_mousedown(e: MouseEvent): void;
     on_mousemove(_e: MouseEvent): void;
     on_mouseup(_e: MouseEvent): void;
     render(): void;
+    reset_game(): void;
     run(): void;
+    update_attack_button(): void;
 }
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
@@ -18,12 +21,15 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 export interface InitOutput {
     readonly memory: WebAssembly.Memory;
     readonly __wbg_canvasapplication_free: (a: number, b: number) => void;
+    readonly canvasapplication_execute_attack: (a: number) => void;
     readonly canvasapplication_new: (a: number, b: number) => [number, number, number];
     readonly canvasapplication_on_keydown: (a: number, b: any) => void;
     readonly canvasapplication_on_mousedown: (a: number, b: any) => void;
     readonly canvasapplication_on_mouseup: (a: number, b: any) => void;
     readonly canvasapplication_render: (a: number) => void;
+    readonly canvasapplication_reset_game: (a: number) => void;
     readonly canvasapplication_run: (a: number) => void;
+    readonly canvasapplication_update_attack_button: (a: number) => void;
     readonly canvasapplication_on_mousemove: (a: number, b: any) => void;
     readonly __externref_table_alloc: () => number;
     readonly __wbindgen_externrefs: WebAssembly.Table;
