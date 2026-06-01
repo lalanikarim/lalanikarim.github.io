@@ -1,6 +1,10 @@
 # 👋 Hi, I'm Karim Lalani
 
-Welcome to my corner of the internet! I'm a game developer and builder interested in creating interactive experiences across the web and beyond.
+Software Engineer | AI Solutions Strategist | Agent Architect
+
+I'm a software professional with 18+ years of experience building scalable, innovative solutions across startups and enterprise. Currently Lead Machine Learning Researcher at [Tricentis](https://tricentis.com) and Founder at [EdgeBrew AI](https://edgebrew.ai), I work at the intersection of AI, systems engineering, and emerging technology.
+
+This repo hosts a few personal game projects — side experiments and PoCs I build to explore game engines, WebAssembly, and creative coding.
 
 ---
 
@@ -42,4 +46,4 @@ An early prototype: a deck-based combat experiment where each suit represents a 
 
 ---
 
-*Built with ❤️ and curiosity.*
+*18+ years shipping software, still tinkering with the things that excite me.*
