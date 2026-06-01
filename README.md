@@ -7,19 +7,19 @@ Welcome to my corner of the internet! I'm a game developer and builder intereste
 ## 🎮 Projects
 
 ### [Neon Ascent](neon-ascent/)
-> _A fast-paced 2D platformer built with Godot and exported to WebGL._
+> _A 2D platformer built with Godot and exported to WebGL._
 
-Dive into a neon-soaked world of jumps, dashes, and precision platforming. Play it live: [neon-ascent/](neon-ascent/)
+Navigate a neon-lit world filled with precision jumps, dashes, and obstacles. Play it live: [neon-ascent/](neon-ascent/)
 
 ### [Sky Striker](sky-striker/)
-> _A lightweight browser game powered by WebAssembly._
+> _A 2D pixelated aircraft shooter built with Bevy + Rust._
 
-Built with Rust → WASM, Sky Striker delivers smooth, native-speed gameplay right in your browser. Play it live: [sky-striker/](sky-striker/)
+Blast through waves of enemy aircraft, manage your magazine, collect power-ups, and upgrade your ship to become the ultimate sky striker. Play it live: [sky-striker/](sky-striker/)
 
 ### [Terra Deck](terra-deck/)
-> _A Rust-based WebAssembly canvas renderer for a tactical browser game._
+> _A turn-based card RPG built with Bevy + Rust._
 
-Features a 2D canvas rendering engine with particle effects, mouse event handling, and high-DPI support — all written in pure Rust with `wasm-bindgen`. Play it live: [terra-deck/](terra-deck/)
+Fight using a deck of poker cards — each suit represents a combat archetype in a rock-paper-scissors dynamic. Features fog of war, a decoupled core/TUI architecture, and 122 passing tests. Play it live: [terra-deck/](terra-deck/)
 
 ---
 
@@ -27,10 +27,10 @@ Features a 2D canvas rendering engine with particle effects, mouse event handlin
 
 | Area | Technologies |
 |---|---|
-| Game Engines | Godot |
-| Systems Programming | Rust, WebAssembly |
+| Game Engines | Bevy, Godot |
+| Languages | Rust, HTML/JS |
 | Rendering | Canvas 2D, WebGL |
-| Tooling | wasm-pack, wasm-bindgen |
+| Tooling | wasm-pack, wasm-bindgen, ratatui |
 
 ---
 
