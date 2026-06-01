@@ -1,1 +1,247 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karim Lalani</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      line-height: 1.6;
+      color: #e6edf3;
+      background-color: #0d1117;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #f0f6fc;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid #30363d;
+      color: #f0f6fc;
+    }
+
+    .title-line {
+      font-size: 1.1rem;
+      color: #8b949e;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: #8b949e;
+      margin-bottom: 1.5rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #30363d;
+      margin: 2rem 0;
+    }
+
+    .project-card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .project-card:hover {
+      border-color: #58a6ff;
+    }
+
+    .project-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-card h3 a {
+      color: #58a6ff;
+      font-weight: 600;
+    }
+
+    .project-card .tagline {
+      font-style: italic;
+      color: #8b949e;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card .desc {
+      color: #c9d1d9;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      background: #161b22;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #30363d;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #30363d;
+    }
+
+    th {
+      background: #1c2129;
+      color: #f0f6fc;
+      font-weight: 600;
+    }
+
+    td {
+      color: #c9d1d9;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .connect-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .connect-list li {
+      padding: 0.5rem 0;
+    }
+
+    .connect-list li::before {
+      content: '';
+    }
+
+    .tagline-footer {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #30363d;
+      color: #8b949e;
+      font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 2rem 1rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>👋 Hi, I'm Karim Lalani</h1>
+
+  <p class="title-line">Software Engineer | AI Solutions Strategist | Agent Architect</p>
+
+  <p class="subtitle">
+    I'm a software professional with 18+ years of experience building scalable, innovative solutions across startups and enterprise. I work at the intersection of AI, systems engineering, and emerging technology.
+  </p>
+
+  <p class="subtitle">
+    This repo hosts a few personal game projects — side experiments and PoCs I build to explore game engines, WebAssembly, and creative coding.
+  </p>
+
+  <hr>
+
+  <h2>🎮 Projects</h2>
+
+  <div class="project-card">
+    <h3><a href="neon-ascent/">Neon Ascent</a></h3>
+    <p class="tagline">A PoC 2D platform climber built with Godot and exported to WebGL.</p>
+    <p class="desc">
+      An early prototype: a neon-lit platform climber with basic jumps and obstacles to scale. 
+      <a href="neon-ascent/">Play it live →</a>
+    </p>
+  </div>
+
+  <div class="project-card">
+    <h3><a href="sky-striker/">Sky Striker</a></h3>
+    <p class="tagline">A PoC 2D aircraft shooter built with Bevy + Rust.</p>
+    <p class="desc">
+      An early prototype: a pixelated sky shooter with basic enemy waves, shooting mechanics, and score tracking. 
+      <a href="sky-striker/">Play it live →</a>
+    </p>
+  </div>
+
+  <div class="project-card">
+    <h3><a href="terra-deck/">Terra Deck</a></h3>
+    <p class="tagline">A PoC turn-based card RPG built with Rust + WebAssembly.</p>
+    <p class="desc">
+      An early prototype: a deck-based combat experiment where each suit represents a distinct combat archetype, rendered on a 2D canvas. 
+      <a href="terra-deck/">Play it live →</a>
+    </p>
+  </div>
+
+  <hr>
+
+  <h2>🛠️ Tech Stack</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Area</th>
+        <th>Technologies</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Game Engines</td>
+        <td>Bevy, Godot</td>
+      </tr>
+      <tr>
+        <td>Languages</td>
+        <td>Rust, HTML/JS</td>
+      </tr>
+      <tr>
+        <td>Rendering</td>
+        <td>Canvas 2D, WebGL</td>
+      </tr>
+      <tr>
+        <td>Tooling</td>
+        <td>wasm-pack, wasm-bindgen, ratatui</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>📬 Connect</h2>
+
+  <ul class="connect-list">
+    <li><strong>GitHub:</strong> <a href="https://github.com/lalanikarim" target="_blank" rel="noopener">lalanikarim</a></li>
+    <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/-karim-lalani/" target="_blank" rel="noopener">Karim Lalani</a></li>
+    <li><strong>Email:</strong> <a href="mailto:jimmy00784@gmail.com">jimmy00784@gmail.com</a></li>
+  </ul>
+
+  <p class="tagline-footer">
+    18+ years shipping software, still tinkering with the things that excite me.
+  </p>
+</body>
+</html>
