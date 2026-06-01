@@ -21,28 +21,16 @@ An early prototype: a neon-lit platform climber with basic jumps and obstacles t
 An early prototype: a pixelated sky shooter with basic enemy waves, shooting mechanics, and score tracking. Play it live: [sky-striker/](sky-striker/)
 
 ### [Terra Deck](terra-deck/)
-> _A PoC turn-based card RPG built with Rust + WebAssembly._
+> _A PoC turn-based card RPG built with Bevy + Rust._
 
 An early prototype: a deck-based combat experiment where each suit represents a distinct combat archetype, rendered on a 2D canvas. Play it live: [terra-deck/](terra-deck/)
 
----
 
-## 🛠️ Tech Stack
-
-| Area | Technologies |
-|---|---|
-| Game Engines | Bevy, Godot |
-| Languages | Rust, HTML/JS |
-| Rendering | Canvas 2D, WebGL |
-| Tooling | wasm-pack, wasm-bindgen, ratatui |
-
----
 
 ## 📬 Connect
 
 - **GitHub:** [lalanikarim](https://github.com/lalanikarim)
 - **LinkedIn:** [Karim Lalani](https://www.linkedin.com/in/-karim-lalani/)
-- **Email:** jimmy00784@gmail.com
 
 ---
 
