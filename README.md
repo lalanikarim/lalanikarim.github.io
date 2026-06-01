@@ -2,7 +2,7 @@
 
 Software Engineer | AI Solutions Strategist | Agent Architect
 
-I'm a software professional with 18+ years of experience building scalable, innovative solutions across startups and enterprise. Currently Lead Machine Learning Researcher at [Tricentis](https://tricentis.com) and Founder at [EdgeBrew AI](https://edgebrew.ai), I work at the intersection of AI, systems engineering, and emerging technology.
+I'm a software professional with 18+ years of experience building scalable, innovative solutions across startups and enterprise. I work at the intersection of AI, systems engineering, and emerging technology.
 
 This repo hosts a few personal game projects — side experiments and PoCs I build to explore game engines, WebAssembly, and creative coding.
 
