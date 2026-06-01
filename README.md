@@ -17,9 +17,9 @@ Navigate a neon-lit world filled with precision jumps, dashes, and obstacles. Pl
 Blast through waves of enemy aircraft, manage your magazine, collect power-ups, and upgrade your ship to become the ultimate sky striker. Play it live: [sky-striker/](sky-striker/)
 
 ### [Terra Deck](terra-deck/)
-> _A turn-based card RPG built with Bevy + Rust._
+> _A PoC turn-based card RPG built with Rust + WebAssembly._
 
-Fight using a deck of poker cards — each suit represents a combat archetype in a rock-paper-scissors dynamic. Features fog of war, a decoupled core/TUI architecture, and 122 passing tests. Play it live: [terra-deck/](terra-deck/)
+An early-stage experiment: a deck-based combat prototype where each suit represents a distinct combat archetype, rendered on a 2D canvas. Play it live: [terra-deck/](terra-deck/)
 
 ---
 
