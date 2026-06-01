@@ -7,19 +7,19 @@ Welcome to my corner of the internet! I'm a game developer and builder intereste
 ## 🎮 Projects
 
 ### [Neon Ascent](neon-ascent/)
-> _A 2D platformer built with Godot and exported to WebGL._
+> _A PoC 2D platformer built with Godot and exported to WebGL._
 
-Navigate a neon-lit world filled with precision jumps, dashes, and obstacles. Play it live: [neon-ascent/](neon-ascent/)
+An early prototype: a neon-lit platformer with basic jumps, dashes, and obstacles. Play it live: [neon-ascent/](neon-ascent/)
 
 ### [Sky Striker](sky-striker/)
-> _A 2D pixelated aircraft shooter built with Bevy + Rust._
+> _A PoC 2D aircraft shooter built with Bevy + Rust._
 
-Blast through waves of enemy aircraft, manage your magazine, collect power-ups, and upgrade your ship to become the ultimate sky striker. Play it live: [sky-striker/](sky-striker/)
+An early prototype: a pixelated sky shooter with basic enemy waves, shooting mechanics, and score tracking. Play it live: [sky-striker/](sky-striker/)
 
 ### [Terra Deck](terra-deck/)
 > _A PoC turn-based card RPG built with Rust + WebAssembly._
 
-An early-stage experiment: a deck-based combat prototype where each suit represents a distinct combat archetype, rendered on a 2D canvas. Play it live: [terra-deck/](terra-deck/)
+An early prototype: a deck-based combat experiment where each suit represents a distinct combat archetype, rendered on a 2D canvas. Play it live: [terra-deck/](terra-deck/)
 
 ---
 
