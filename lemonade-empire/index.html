@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lemonade Empire ☕🍋</title>
+  <style>
+    :root {
+      --bg: #fef9e7;
+      --card: #fffef5;
+      --yellow: #f7d716;
+      --lemon: #ffd700;
+      --lemon-dark: #c5a600;
+      --green: #7bc67e;
+      --green-dark: #4a9e4c;
+      --brown: #8b6914;
+      --text: #3a3200;
+      --text-light: #7a7260;
+      --border: #e8e0c0;
+      --shadow: rgba(139, 105, 20, 0.12);
+      --radius: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, var(--lemon), var(--yellow));
+      padding: 16px 24px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      font-size: 1.6em;
+      color: var(--brown);
+      text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    }
+    header h1 span { font-size: 1.2em; }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 340px 1fr 300px;
+      grid-template-rows: auto;
+      gap: 20px;
+    }
+
+    /* ── Panels ── */
+    .panel {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+    .panel h2 {
+      font-size: 1.1em;
+      color: var(--brown);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── Left: Stand & Stats ── */
+    .stand-display {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(to bottom, #e8f5e9, var(--bg));
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .stand-emoji {
+      font-size: 4em;
+      transition: transform 0.1s ease;
+      cursor: pointer;
+      user-select: none;
+      line-height: 1;
+      position: relative;
+    }
+    .stand-emoji:hover { transform: scale(1.05); }
+    .stand-emoji:active { transform: scale(0.9); }
+    .stand-name {
+      font-size: 1.3em;
+      font-weight: 700;
+      color: var(--brown);
+      margin-top: 8px;
+    }
+    .stand-level {
+      font-size: 0.85em;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    /* Emoji click bounce */
+    @keyframes emojiBounce {
+      0%   { transform: scale(1); }
+      40%  { transform: scale(0.75); }
+      100% { transform: scale(1); }
+    }
+    .emoji-bounce {
+      animation: emojiBounce 0.25s ease-out;
+    }
+
+    /* Click ripple */
+    .click-ripple {
+      position: absolute;
+      pointer-events: none;
+      font-weight: 800;
+      font-size: 1.4em;
+      color: #1b5e20;
+      animation: floatUp 1.2s ease-out forwards;
+      text-shadow: 0 0 6px rgba(255,255,255,0.9), 0 1px 3px rgba(0,0,0,0.15);
+      white-space: nowrap;
+      z-index: 100;
+    }
+    @keyframes floatUp {
+      0%   { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-60px) scale(1.3); }
+    }
+
+    /* Money display */
+    .money-display {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .money-amount {
+      font-size: 2.2em;
+      font-weight: 800;
+      color: var(--green-dark);
+      font-variant-numeric: tabular-nums;
+    }
+    .money-label {
+      font-size: 0.85em;
+      color: var(--text-light);
+    }
+    .income-rate {
+      font-size: 0.95em;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+    .income-rate span { color: var(--green-dark); font-weight: 600; }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 0.85em;
+    }
+    .stat-item {
+      background: var(--bg);
+      padding: 8px 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stat-value {
+      font-weight: 700;
+      color: var(--brown);
+      font-size: 1.1em;
+    }
+    .stat-label {
+      font-size: 0.8em;
+      color: var(--text-light);
+    }
+
+    /* ── Center: Shop ── */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+    .tab {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid var(--border);
+      background: var(--card);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9em;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.2s;
+      color: var(--text);
+    }
+    .tab:hover { border-color: var(--lemon); background: #fffde7; }
+    .tab.active {
+      background: var(--lemon);
+      border-color: var(--lemon-dark);
+      color: var(--brown);
+    }
+
+    .shop-section { display: none; }
+    .shop-section.active { display: block; }
+
+    .shop-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--card);
+    }
+    .shop-item:hover:not(.locked) {
+      border-color: var(--lemon);
+      box-shadow: 0 2px 8px var(--shadow);
+      transform: translateY(-1px);
+    }
+    .shop-item.locked {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .shop-item.affordable {
+      border-color: var(--green);
+    }
+    .shop-item.affordable:hover {
+      background: #f1f8e9;
+    }
+    .shop-icon {
+      font-size: 2em;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .shop-info { flex: 1; min-width: 0; }
+    .shop-name {
+      font-weight: 700;
+      font-size: 0.95em;
+      color: var(--brown);
+    }
+    .shop-desc {
+      font-size: 0.8em;
+      color: var(--text-light);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .shop-cost {
+      font-weight: 700;
+      font-size: 0.9em;
+      color: var(--green-dark);
+      white-space: nowrap;
+    }
+    .shop-count {
+      background: var(--lemon);
+      color: var(--brown);
+      font-weight: 700;
+      font-size: 0.8em;
+      padding: 2px 8px;
+      border-radius: 12px;
+      min-width: 28px;
+      text-align: center;
+    }
+
+    /* ── Right: Upgrades & Achievements ── */
+    .upgrade-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 8px;
+    }
+    .upgrade-item {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--card);
+      text-align: center;
+      padding: 6px;
+    }
+    .upgrade-item:hover:not(.locked):not(.bought) {
+      border-color: var(--lemon);
+      box-shadow: 0 2px 8px var(--shadow);
+      transform: translateY(-2px);
+    }
+    .upgrade-item.locked { opacity: 0.35; cursor: not-allowed; }
+    .upgrade-item.bought {
+      background: #e8f5e9;
+      border-color: var(--green);
+      cursor: default;
+    }
+    .upgrade-item.affordable {
+      border-color: var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(74, 158, 76, 0.3); }
+      50% { box-shadow: 0 0 0 6px rgba(74, 158, 76, 0); }
+    }
+    .upgrade-icon { font-size: 1.6em; }
+    .upgrade-name {
+      font-size: 0.65em;
+      font-weight: 600;
+      margin-top: 4px;
+      color: var(--brown);
+      line-height: 1.2;
+    }
+    .upgrade-cost {
+      font-size: 0.7em;
+      color: var(--green-dark);
+      font-weight: 700;
+    }
+
+    /* Achievements */
+    .achievement {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 6px;
+      background: var(--card);
+      transition: all 0.3s;
+    }
+    .achievement.unlocked {
+      border-color: var(--lemon);
+      background: #fffde7;
+    }
+    .achievement.locked { opacity: 0.35; }
+    .ach-icon { font-size: 1.5em; }
+    .ach-name { font-weight: 700; font-size: 0.85em; color: var(--brown); }
+    .ach-desc { font-size: 0.75em; color: var(--text-light); }
+
+    /* ── Prestige bar ── */
+    .prestige-bar {
+      background: linear-gradient(135deg, #7b1fa2, #e040fb);
+      color: white;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .prestige-bar h3 { font-size: 0.95em; margin-bottom: 4px; }
+    .prestige-bar p { font-size: 0.8em; opacity: 0.9; }
+    .prestige-btn {
+      margin-top: 8px;
+      padding: 8px 20px;
+      border: 2px solid white;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9em;
+      transition: all 0.2s;
+    }
+    .prestige-btn:hover { background: rgba(255,255,255,0.35); }
+    .prestige-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--brown);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      z-index: 999;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--lemon-dark); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1><span>🍋</span> Lemonade Empire <span>🍋</span></h1>
+  </header>
+
+  <div class="container">
+    <!-- LEFT: Stand, Money, Stats -->
+    <div>
+      <div class="stand-display" id="standDisplay">
+        <div class="stand-emoji" id="standEmoji" title="Click to sell lemonade!">🪧</div>
+        <div class="stand-name" id="standName">Cardboard Sign</div>
+        <div class="stand-level" id="standLevel">Level 1</div>
+        <div id="clickCounter" style="margin-top:8px;font-size:0.85em;color:#7a7260;"></div>
+      </div>
+
+      <div class="money-display">
+        <div class="money-amount" id="moneyDisplay">$0.00</div>
+        <div class="money-label">lemonade earned</div>
+        <div class="income-rate">earning <span id="incomeRate">$0.00/s</span></div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value" id="totalClicks">0</div>
+          <div class="stat-label">Glasses Clicked</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="totalEarned">$0</div>
+          <div class="stat-label">Total Earned</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="totalGlasses">0</div>
+          <div class="stat-label">Total Glasses</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="clickValue">$0.25</div>
+          <div class="stat-label">Per Click</div>
+        </div>
+      </div>
+
+      <!-- Prestige -->
+      <div class="prestige-bar" id="prestigeBar" style="display:none;">
+        <h3>🌟 Lemon Points</h3>
+        <p>You have <span id="lpCount">0</span> LP (+<span id="lpBonus">0</span>% bonus)</p>
+        <button class="prestige-btn" id="prestigeBtn" onclick="prestige()">
+          Sell Business — earn <span id="prestigeGain">0</span> LP
+        </button>
+        <p style="font-size:0.7em; margin-top:6px; opacity:0.7;">
+          Resets progress but gives permanent bonuses
+        </p>
+      </div>
+    </div>
+
+    <!-- CENTER: Shop -->
+    <div class="panel">
+      <div class="tabs">
+        <div class="tab active" data-tab="buildings" onclick="switchTab('buildings')">🏗️ Buildings</div>
+        <div class="tab" data-tab="upgrades" onclick="switchTab('upgrades')">⬆️ Upgrades</div>
+      </div>
+
+      <!-- Buildings -->
+      <div class="shop-section active" id="tab-buildings"></div>
+
+      <!-- Upgrades -->
+      <div class="shop-section" id="tab-upgrades"></div>
+    </div>
+
+    <!-- RIGHT: Achievements -->
+    <div class="panel">
+      <h2>🏆 Achievements</h2>
+      <div id="achievementList"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <div id="debugOverlay" style="position:fixed;bottom:10px;right:10px;background:#000;color:#0f0;padding:8px 12px;border-radius:8px;font:11px/1.6 monospace;z-index:9999;max-width:280px;max-height:150px;overflow-y:auto;border:1px solid #0f0;opacity:0.9;">
+    <div id="debugLog"></div>
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════
+    //  GAME STATE
+    // ═══════════════════════════════════════════════════════════
+    const defaultState = () => ({
+      money: 0,
+      totalEarned: 0,
+      totalGlasses: 0,
+      totalClicks: 0,
+      clickValue: 0.25,
+      passiveIncome: 0,       // per second
+      buildings: {},
+      upgrades: {},
+      achievements: {},
+      prestigePoints: 0,
+      prestigeBonus: 0,       // percentage
+      startTime: Date.now(),
+    });
+
+    let G = defaultState();
+
+    // ═══════════════════════════════════════════════════════════
+    //  STAND PROGRESSION
+    // ═══════════════════════════════════════════════════════════
+    const STANDS = [
+      { name: 'Cardboard Sign',  emoji: '🪧',  min: 0 },
+      { name: 'Wooden Stand',    emoji: '🏪',  min: 50 },
+      { name: 'Colorful Kiosk',  emoji: '🏬',  min: 500 },
+      { name: 'Lemonade Cart',   emoji: '🛒',  min: 2500 },
+      { name: 'Food Truck',      emoji: '🚚',  min: 15000 },
+      { name: 'Brick & Mortar',  emoji: '🏠',  min: 100000 },
+      { name: 'Juice Bar',       emoji: '🍋',  min: 750000 },
+      { name: 'Franchise HQ',    emoji: '🏙️',  min: 5000000 },
+      { name: 'Lemonade Empire', emoji: '🌍',  min: 50000000 },
+    ];
+
+    // ═══════════════════════════════════════════════════════════
+    //  BUILDINGS (passive income)
+    // ═══════════════════════════════════════════════════════════
+    const BUILDINGS = [
+      { id: 'lemon_tree',  name: 'Lemon Tree',     emoji: '🌳', desc: 'Grows lemons for your stand',       baseCost: 15,     baseIncome: 0.1,   costMult: 1.15 },
+      { id: 'ice_box',     name: 'Ice Box',         emoji: '🧊', desc: 'Keeps lemonade cold and fresh',     baseCost: 100,    baseIncome: 0.5,   costMult: 1.15 },
+      { id: 'helper',      name: 'Hire Helper',     emoji: '👦', desc: 'A kid to help squeeze lemons',      baseCost: 500,    baseIncome: 2,     costMult: 1.15 },
+      { id: 'sugar_jar',   name: 'Sugar Jar',       emoji: '🍯', desc: 'Premium sugar for sweeter taste',   baseCost: 2000,   baseIncome: 8,     costMult: 1.15 },
+      { id: 'delivery',    name: 'Delivery Route',  emoji: '🚲', desc: 'Deliver to neighbors for extra $$', baseCost: 8000,   baseIncome: 30,    costMult: 1.15 },
+      { id: 'juicer',      name: 'Commercial Juicer', emoji: '⚙️', desc: 'Industrial-grade lemon juicer',    baseCost: 30000,  baseIncome: 120,   costMult: 1.15 },
+      { id: 'franchise',   name: 'Franchise License', emoji: '📜', desc: 'Open a second location',            baseCost: 120000, baseIncome: 500,   costMult: 1.15 },
+      { id: 'factory',     name: 'Bottling Plant',  emoji: '🏭', desc: 'Mass-produce bottled lemonade',     baseCost: 600000, baseIncome: 2500,  costMult: 1.15 },
+      { id: 'empire',      name: 'Lemonade Corp',   emoji: '🏢', desc: 'A multinational lemonade empire',   baseCost: 5000000,baseIncome: 15000, costMult: 1.15 },
+    ];
+
+    // ═══════════════════════════════════════════════════════════
+    //  UPGRADES
+    // ═══════════════════════════════════════════════════════════
+    const UPGRADES = [
+      { id: 'better_lemons',   name: 'Better Lemons',   emoji: '🍋', desc: '2x click value',               cost: 50,       type: 'click',  mult: 2,  req: { clicks: 10 } },
+      { id: 'ice_machine',     name: 'Ice Machine',     emoji: '🧊', desc: '2x passive income',             cost: 200,      type: 'passive',mult: 2,  req: { buildings: { ice_box: 1 } } },
+      { id: 'sugar_rush',      name: 'Sugar Rush',      emoji: '🍬', desc: '2x click value',                cost: 500,      type: 'click',  mult: 2,  req: { clicks: 50 } },
+      { id: 'better_cups',     name: 'Better Cups',     emoji: '🥤', desc: '2x passive income',             cost: 1000,     type: 'passive',mult: 2,  req: { buildings: { helper: 1 } } },
+      { id: 'secret_recipe',   name: 'Secret Recipe',   emoji: '📖', desc: '3x click value',                cost: 3000,     type: 'click',  mult: 3,  req: { clicks: 200 } },
+      { id: 'marketing',       name: 'Marketing Flyer', emoji: '📢', desc: '2x passive income',             cost: 8000,     type: 'passive',mult: 2,  req: { buildings: { sugar_jar: 1 } } },
+      { id: 'neon_sign',       name: 'Neon Sign',       emoji: '💡', desc: '3x passive income',             cost: 25000,    type: 'passive',mult: 3,  req: { buildings: { delivery: 1 } } },
+      { id: 'social_media',    name: 'Social Media',    emoji: '📱', desc: '5x click value',                cost: 50000,    type: 'click',  mult: 5,  req: { clicks: 1000 } },
+      { id: 'local_news',      name: 'Local News',      emoji: '📰', desc: '5x passive income',             cost: 150000,   type: 'passive',mult: 5,  req: { buildings: { juicer: 1 } } },
+      { id: 'tv_commercial',   name: 'TV Commercial',   emoji: '📺', desc: '10x everything',                cost: 1000000,  type: 'global', mult: 10, req: { earned: 500000 } },
+      { id: 'lemon_genetic',   name: 'Genetic Lemons',  emoji: '🧬', desc: '3x click value',                cost: 2000000,  type: 'click',  mult: 3,  req: { clicks: 10000 } },
+      { id: 'time_machine',    name: 'Time Machine',    emoji: '⏰', desc: '10x passive income',            cost: 10000000, type: 'passive',mult: 10, req: { buildings: { factory: 1 } } },
+    ];
+
+    // ═══════════════════════════════════════════════════════════
+    //  ACHIEVEMENTS
+    // ═══════════════════════════════════════════════════════════
+    const ACHIEVEMENTS = [
+      { id: 'first_click',      name: 'First Glass',        emoji: '🥛', desc: 'Sell your first glass of lemonade',              check: g => g.totalClicks >= 1 },
+      { id: 'hundred_click',    name: 'Hard Worker',        emoji: '💪', desc: 'Click 100 times',                                 check: g => g.totalClicks >= 100 },
+      { id: 'thousand_click',   name: 'Carpal Tunnel',      emoji: '🤚', desc: 'Click 1,000 times',                               check: g => g.totalClicks >= 1000 },
+      { id: 'ten_k_click',      name: 'Click Master',       emoji: '🏆', desc: 'Click 10,000 times',                              check: g => g.totalClicks >= 10000 },
+      { id: 'first_earn',       name: 'First Dollar',       emoji: '💵', desc: 'Earn your first dollar',                          check: g => g.totalEarned >= 1 },
+      { id: 'hundred_earn',     name: 'Hustler',            emoji: '💰', desc: 'Earn $100 total',                                 check: g => g.totalEarned >= 100 },
+      { id: 'thousand_earn',    name: 'Small Business',     emoji: '🏪', desc: 'Earn $1,000 total',                               check: g => g.totalEarned >= 1000 },
+      { id: 'tenthousand_earn', name: 'Entrepreneur',       emoji: '💼', desc: 'Earn $10,000 total',                              check: g => g.totalEarned >= 10000 },
+      { id: 'hundred_k_earn',   name: 'Business Mogul',     emoji: '🏙️', desc: 'Earn $100,000 total',                             check: g => g.totalEarned >= 100000 },
+      { id: 'mil_earn',         name: 'Lemonade Tycoon',    emoji: '🌍', desc: 'Earn $1,000,000 total',                           check: g => g.totalEarned >= 1000000 },
+      { id: 'first_building',   name: 'Expansion',          emoji: '🌱', desc: 'Buy your first building',                         check: g => Object.values(g.buildings).reduce((a,b)=>a+b,0) >= 1 },
+      { id: 'ten_buildings',    name: 'Scaling Up',         emoji: '📈', desc: 'Own 10 buildings total',                          check: g => Object.values(g.buildings).reduce((a,b)=>a+b,0) >= 10 },
+      { id: 'fifty_buildings',  name: 'Empire Builder',     emoji: '🏗️', desc: 'Own 50 buildings total',                          check: g => Object.values(g.buildings).reduce((a,b)=>a+b,0) >= 50 },
+      { id: 'first_prestige',   name: 'Phoenix Rising',     emoji: '🔥', desc: 'Prestige for the first time',                     check: g => g.prestigePoints >= 1 },
+      { id: 'five_prestige',    name: 'Reborn',             emoji: '⭐', desc: 'Earn 5 Lemon Points',                             check: g => g.prestigePoints >= 5 },
+      { id: 'glass_1000',       name: 'Lemonade Addict',    emoji: '🍋', desc: 'Sell 1,000 glasses total',                        check: g => g.totalGlasses >= 1000 },
+      { id: 'glass_100k',       name: 'Lemonade Liquidator',emoji: '🫧', desc: 'Sell 100,000 glasses total',                      check: g => g.totalGlasses >= 100000 },
+      { id: 'all_upgrades',     name: 'Fully Loaded',       emoji: '🚀', desc: 'Buy every upgrade',                               check: g => UPGRADES.every(u => g.upgrades[u.id]) },
+    ];
+
+    // ═══════════════════════════════════════════════════════════
+    //  HELPERS
+    // ═══════════════════════════════════════════════════════════
+    function formatMoney(n) {
+      if (n < 0) return '-$' + formatMoney(-n);
+      if (n < 1000) return '$' + n.toFixed(2);
+      const suffixes = ['', 'K', 'M', 'B', 'T', 'Qa', 'Qi'];
+      const tier = Math.floor(Math.log10(n) / 3);
+      if (tier >= suffixes.length) return '$' + n.toExponential(2);
+      const scaled = n / Math.pow(1000, tier);
+      return '$' + scaled.toFixed(tier === 0 ? 2 : 1) + suffixes[tier];
+    }
+
+    function debug(msg) {
+      const el = document.getElementById('debugLog');
+      if (!el) return;
+      const line = document.createElement('div');
+      line.textContent = msg;
+      el.prepend(line);
+      while (el.children.length > 50) el.removeChild(el.lastChild);
+    }
+
+    function formatNum(n) {
+      if (n < 1000) return n.toLocaleString();
+      const suffixes = ['', 'K', 'M', 'B', 'T'];
+      const tier = Math.floor(Math.log10(n) / 3);
+      if (tier >= suffixes.length) return n.toExponential(2);
+      const scaled = n / Math.pow(1000, tier);
+      return scaled.toFixed(1) + suffixes[tier];
+    }
+
+    function getBuildingCost(b) {
+      const count = G.buildings[b.id] || 0;
+      return b.baseCost * Math.pow(b.costMult, count);
+    }
+
+    function recalcPassive() {
+      let income = 0;
+      BUILDINGS.forEach(b => {
+        const count = G.buildings[b.id] || 0;
+        income += b.baseIncome * count;
+      });
+      // Apply passive multipliers from upgrades
+      const passiveMult = getMultiplier('passive');
+      income *= passiveMult;
+      // Prestige bonus
+      income *= (1 + G.prestigeBonus);
+      G.passiveIncome = income;
+    }
+
+    function getMultiplier(type) {
+      let mult = 1;
+      UPGRADES.forEach(u => {
+        if (G.upgrades[u.id] && (u.type === type || u.type === 'global')) {
+          mult *= u.mult;
+        }
+      });
+      return mult;
+    }
+
+    function getClickValue() {
+      let val = G.clickValue;
+      const clickMult = getMultiplier('click');
+      val *= clickMult;
+      val *= (1 + G.prestigeBonus);
+      return val;
+    }
+
+    function getStandLevel() {
+      let level = 0;
+      for (let i = STANDS.length - 1; i >= 0; i--) {
+        if (G.totalEarned >= STANDS[i].min) { level = i; break; }
+      }
+      return level;
+    }
+
+    function checkAchievements() {
+      ACHIEVEMENTS.forEach(a => {
+        if (!G.achievements[a.id] && a.check(G)) {
+          G.achievements[a.id] = true;
+          showToast(`🏆 Achievement: ${a.name}!`);
+        }
+      });
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    //  UI RENDERING
+    // ═══════════════════════════════════════════════════════════
+    function renderBuildings() {
+      const container = document.getElementById('tab-buildings');
+      container.innerHTML = BUILDINGS.map(b => {
+        const count = G.buildings[b.id] || 0;
+        const cost = getBuildingCost(b);
+        const affordable = G.money >= cost;
+        const locked = !isUnlocked(b);
+        const cls = locked ? 'locked' : (affordable ? 'affordable' : '');
+        return `
+          <div class="shop-item ${cls}" onclick="buyBuilding('${b.id}')">
+            <div class="shop-icon">${b.emoji}</div>
+            <div class="shop-info">
+              <div class="shop-name">${b.name}</div>
+              <div class="shop-desc">${locked ? `Unlock: ${formatReq(b.req)}` : b.desc}</div>
+            </div>
+            <div class="shop-cost">${formatMoney(cost)}</div>
+            <div class="shop-count">${count}</div>
+          </div>`;
+      }).join('');
+    }
+
+    function isUnlocked(b) {
+      if (!b.req) return true;
+      if (b.req.buildings) {
+        return Object.entries(b.req.buildings).every(([id, count]) => (G.buildings[id] || 0) >= count);
+      }
+      if (b.req.earned) return G.totalEarned >= b.req.earned;
+      if (b.req.clicks) return G.totalClicks >= b.req.clicks;
+      return true;
+    }
+
+    function formatReq(req) {
+      if (!req) return '';
+      if (req.buildings) return Object.entries(req.buildings).map(([id, n]) => `${BUILDINGS.find(b=>b.id===id)?.name || id} x${n}`).join(', ');
+      if (req.earned) return `Earn ${formatMoney(req.earned)}`;
+      if (req.clicks) return `${req.clicks} clicks`;
+      return '';
+    }
+
+    function renderUpgrades() {
+      const container = document.getElementById('tab-upgrades');
+      const visible = UPGRADES.filter(u => {
+        if (!u.req) return true;
+        if (u.req.clicks) return G.totalClicks >= u.req.clicks * 0.5;
+        if (u.req.buildings) return Object.entries(u.req.buildings).some(([id, n]) => (G.buildings[id] || 0) >= n);
+        if (u.req.earned) return G.totalEarned >= u.req.earned * 0.5;
+        return true;
+      });
+      container.innerHTML = visible.map(u => {
+        const bought = G.upgrades[u.id];
+        const affordable = G.money >= u.cost && !bought;
+        const locked = !isUnlocked(u) && !bought;
+        const cls = bought ? 'bought' : (locked ? 'locked' : (affordable ? 'affordable' : ''));
+        return `
+          <div class="upgrade-item ${cls}" onclick="${bought ? '' : `buyUpgrade('${u.id}')`}">
+            <div class="upgrade-icon">${bought ? '✅' : u.emoji}</div>
+            <div class="upgrade-name">${u.name}</div>
+            <div class="upgrade-cost">${bought ? 'Owned' : formatMoney(u.cost)}</div>
+          </div>`;
+      }).join('');
+    }
+
+    function renderAchievements() {
+      const container = document.getElementById('achievementList');
+      container.innerHTML = ACHIEVEMENTS.map(a => {
+        const unlocked = G.achievements[a.id];
+        const cls = unlocked ? 'unlocked' : 'locked';
+        return `
+          <div class="achievement ${cls}">
+            <div class="ach-icon">${unlocked ? a.emoji : '🔒'}</div>
+            <div>
+              <div class="ach-name">${unlocked ? a.name : '???'}</div>
+              <div class="ach-desc">${unlocked ? a.desc : 'Keep playing to unlock'}</div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    // Track whether shop DOM needs rebuilding
+    let dirtyBuildings = true;
+    let dirtyUpgrades = true;
+    let dirtyAchievements = true;
+    let lastMoneyForAfford = -1;
+
+    function needsShopRebuild() {
+      // Rebuild shop when money crosses 10x thresholds (changes affordablity)
+      const bucket = Math.floor(Math.log10(Math.max(G.money, 1)));
+      return bucket !== lastMoneyForAfford;
+    }
+
+    function fullRebuild() {
+      renderBuildings();
+      renderUpgrades();
+      checkAchievements();
+      renderAchievements();
+      lastMoneyForAfford = Math.floor(Math.log10(Math.max(G.money, 1)));
+      dirtyBuildings = false;
+      dirtyUpgrades = false;
+      dirtyAchievements = false;
+    }
+
+    function updateUI() {
+      // Lightweight: only update text nodes every frame (no DOM rebuild)
+      const moneyEl = document.getElementById('moneyDisplay');
+      const rateEl = document.getElementById('incomeRate');
+      const clicksEl = document.getElementById('totalClicks');
+      const earnedEl = document.getElementById('totalEarned');
+      const glassesEl = document.getElementById('totalGlasses');
+      const cvalEl = document.getElementById('clickValue');
+      const ccEl = document.getElementById('clickCounter');
+
+      if (moneyEl) moneyEl.textContent = formatMoney(G.money);
+      if (rateEl) rateEl.textContent = formatMoney(G.passiveIncome) + '/s';
+      if (clicksEl) clicksEl.textContent = formatNum(G.totalClicks);
+      if (earnedEl) earnedEl.textContent = formatMoney(G.totalEarned);
+      if (glassesEl) glassesEl.textContent = formatNum(G.totalGlasses);
+      if (cvalEl) cvalEl.textContent = formatMoney(getClickValue());
+      if (ccEl) ccEl.textContent = '👆 clicks: ' + G.totalClicks + ' | money: ' + formatMoney(G.money);
+
+      // Stand
+      const standIdx = getStandLevel();
+      const standEmojiEl = document.getElementById('standEmoji');
+      if (standEmojiEl) standEmojiEl.textContent = STANDS[standIdx].emoji;
+      const standNameEl = document.getElementById('standName');
+      if (standNameEl) standNameEl.textContent = STANDS[standIdx].name;
+      const standLevelEl = document.getElementById('standLevel');
+      if (standLevelEl) standLevelEl.textContent = 'Level ' + (standIdx + 1) + ' — ' + STANDS[standIdx].name;
+
+      // Prestige
+      const prestigeGain = calcPrestigeGain();
+      const prestigeBar = document.getElementById('prestigeBar');
+      if (prestigeBar) {
+        if (G.prestigePoints > 0 || G.totalEarned >= 100000) {
+          prestigeBar.style.display = 'block';
+          const lpCount = document.getElementById('lpCount');
+          if (lpCount) lpCount.textContent = G.prestigePoints;
+          const lpBonus = document.getElementById('lpBonus');
+          if (lpBonus) lpBonus.textContent = (G.prestigeBonus * 100).toFixed(0);
+          const pg = document.getElementById('prestigeGain');
+          if (pg) pg.textContent = prestigeGain;
+          const pb = document.getElementById('prestigeBtn');
+          if (pb) pb.disabled = prestigeGain < 1;
+        }
+      }
+
+      // Rebuild shop DOM only when affordability changes (roughly every log10 bucket)
+      if (needsShopRebuild()) {
+        fullRebuild();
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    //  ACTIONS
+    // ═══════════════════════════════════════════════════════════
+    function sellLemonade(e) {
+      debug('[CLICK] sellLemonade called, event=' + !!e + ' clientX=' + (e?.clientX ?? 'none') + ' clientY=' + (e?.clientY ?? 'none'));
+      const val = getClickValue();
+      debug('[CLICK] clickValue = ' + val);
+      G.money += val;
+      G.totalEarned += val;
+      G.totalGlasses++;
+      G.totalClicks++;
+      const cc = document.getElementById('clickCounter');
+      if (cc) cc.textContent = '👆 clicks: ' + G.totalClicks + ' | money: ' + formatMoney(G.money);
+      debug('[CLICK] money now ' + G.money);
+
+      // Emoji bounce effect
+      const emoji = document.getElementById('standEmoji');
+      debug('[CLICK] emoji elem: ' + (emoji ? 'found' : 'NULL'));
+      emoji.classList.remove('emoji-bounce');
+      void emoji.offsetWidth;
+      emoji.classList.add('emoji-bounce');
+      setTimeout(() => emoji.classList.remove('emoji-bounce'), 260);
+
+      // Float animation
+      const display = document.getElementById('standDisplay');
+      const rect = display.getBoundingClientRect();
+      debug('[CLICK] display rect w=' + rect.width + ' h=' + rect.height + ' children=' + display.children.length);
+      const ripple = document.createElement('div');
+      ripple.className = 'click-ripple';
+      ripple.textContent = '+' + formatMoney(val);
+      const cx = e ? e.clientX - rect.left : rect.width / 2;
+      const cy = e ? e.clientY - rect.top : rect.height / 2;
+      ripple.style.left = cx + 'px';
+      ripple.style.top = cy + 'px';
+      debug('[CLICK] ripple pos x=' + cx + ' y=' + cy);
+      display.appendChild(ripple);
+      debug('[CLICK] ripple appended, children now=' + display.children.length);
+      ripple.addEventListener('animationend', () => {
+        debug('[CLICK] animationend fired');
+        ripple.remove();
+      });
+
+      updateUI();
+    }
+
+    function buyBuilding(id) {
+      debug('[BUY] building clicked: ' + id);
+      const b = BUILDINGS.find(x => x.id === id);
+      const cost = getBuildingCost(b);
+      if (G.money < cost) {
+        debug('[BUY] cannot afford, need ' + cost + ' have ' + G.money);
+        return;
+      }
+      G.money -= cost;
+      G.buildings[id] = (G.buildings[id] || 0) + 1;
+      recalcPassive();
+      debug('[BUY] bought ' + id + ', count=' + G.buildings[id]);
+      updateUI();
+    }
+
+    function buyUpgrade(id) {
+      debug('[BUY] upgrade clicked: ' + id);
+      const u = UPGRADES.find(x => x.id === id);
+      if (G.upgrades[id]) { debug('[BUY] already owned'); return; }
+      if (G.money < u.cost) { debug('[BUY] cannot afford'); return; }
+      G.money -= u.cost;
+      G.upgrades[id] = true;
+      recalcPassive();
+      debug('[BUY] bought upgrade: ' + id);
+      showToast(`⬆️ Upgrade: ${u.name}!`);
+      updateUI();
+    }
+
+    function calcPrestigeGain() {
+      if (G.totalEarned < 100000) return 0;
+      return Math.floor(Math.sqrt(G.totalEarned / 100000));
+    }
+
+    function prestige() {
+      const gain = calcPrestigeGain();
+      if (gain < 1) return;
+      if (!confirm(`Prestige for ${gain} Lemon Points?\nThis resets your money, buildings, and upgrades.\nYou'll keep achievements and earn a permanent +${(gain * 10)}% bonus.`)) return;
+
+      G.prestigePoints += gain;
+      G.prestigeBonus = G.prestigePoints * 0.1; // 10% per point
+      const kept = {
+        achievements: { ...G.achievements },
+        prestigePoints: G.prestigePoints,
+        prestigeBonus: G.prestigeBonus,
+        startTime: G.startTime,
+      };
+      G = defaultState();
+      G.achievements = kept.achievements;
+      G.prestigePoints = kept.prestigePoints;
+      G.prestigeBonus = kept.prestigeBonus;
+      G.startTime = kept.startTime;
+      recalcPassive();
+      showToast(`🌟 Prestige! +${gain} Lemon Points! (+${(gain * 10)}% bonus)`);
+      updateUI();
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+      document.querySelectorAll('.shop-section').forEach(s => s.classList.toggle('active', s.id === 'tab-' + tab));
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    //  SAVE / LOAD
+    // ═══════════════════════════════════════════════════════════
+    function saveGame() {
+      try { localStorage.setItem('lemonadeEmpire', JSON.stringify(G)); } catch(e) {}
+    }
+
+    function loadGame() {
+      try {
+        const data = localStorage.getItem('lemonadeEmpire');
+        if (data) {
+          const parsed = JSON.parse(data);
+          G = { ...defaultState(), ...parsed };
+          recalcPassive();
+        }
+      } catch(e) {}
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    //  GAME LOOP
+    // ═══════════════════════════════════════════════════════════
+    let lastTick = Date.now();
+
+    function gameLoop() {
+      const now = Date.now();
+      const dt = (now - lastTick) / 1000;
+      lastTick = now;
+
+      if (G.passiveIncome > 0) {
+        const earned = G.passiveIncome * dt;
+        G.money += earned;
+        G.totalEarned += earned;
+        G.totalGlasses += earned / getClickValue(); // rough conversion
+      }
+
+      updateUI();
+      requestAnimationFrame(gameLoop);
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    //  INIT
+    // ═══════════════════════════════════════════════════════════
+    window.onerror = function(msg, url, line, col, err) {
+      console.error('[ERROR]', msg, 'line:', line, 'col:', col, err);
+    };
+
+    const emojiEl = document.getElementById('standEmoji');
+    debug('[INIT] emoji element: ' + (emojiEl ? 'found (' + emojiEl.tagName + ')' : 'NULL'));
+    emojiEl.addEventListener('click', function(e) {
+      debug('[INIT] emoji CLICK event fired! button=' + e.button);
+      sellLemonade(e);
+    }, false);
+    emojiEl.addEventListener('mousedown', function(e) {
+      debug('[INIT] emoji mousedown! button=' + e.button);
+    }, false);
+    emojiEl.addEventListener('touchstart', function(e) {
+      debug('[INIT] emoji touchstart! touches=' + e.touches.length);
+    }, false);
+    debug('[INIT] all event listeners attached, game starting');
+
+    loadGame();
+    recalcPassive();
+    updateUI();
+    gameLoop();
+
+    // Auto-save every 15 seconds
+    setInterval(saveGame, 15000);
+
+    // Save on exit
+    window.addEventListener('beforeunload', saveGame);
+  </script>
+</body>
+</html>
