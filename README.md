@@ -25,6 +25,11 @@ An early prototype: a pixelated sky shooter with basic enemy waves, shooting mec
 
 An early prototype: a deck-based combat experiment where each suit represents a distinct combat archetype, rendered on a 2D canvas. Play it live: [terra-deck/](terra-deck/)
 
+### [Lemonade Empire](lemonade-empire/)
+> _A vanilla HTML/CSS/JS idle-clicker tycoon game._
+
+A lemonade stand empire builder: click to sell glasses, hire helpers, buy upgrades, unlock achievements, and prestige for permanent bonuses. Play it live: [lemonade-empire/](lemonade-empire/)
+
 
 
 ## 📬 Connect
