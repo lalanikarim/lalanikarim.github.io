@@ -30,6 +30,10 @@ An early prototype: a deck-based combat experiment where each suit represents a 
 
 A lemonade stand empire builder: click to sell glasses, hire helpers, buy upgrades, unlock achievements, and prestige for permanent bonuses. Play it live: [lemonade-empire/](lemonade-empire/)
 
+### [Turret Survivor](turret-survivor/)
+> _A browser-based idle turret defense game inspired by Survivor.io._
+
+Auto-fire, survive endless waves, unlock permanent upgrades. A turret defense experiment with progression systems and persistent bonuses. Play it live: [turret-survivor/](turret-survivor/)
 
 
 ## 📬 Connect

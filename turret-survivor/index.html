@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Idle Survivor — Turret Defense</title>
+  <link rel="stylesheet" href="style.min.css" />
+</head>
+<body>
+  <div id="game-container">
+    <div id="splash-screen">
+      <h1 id="splash-title">TURRET SURVIVOR</h1>
+      <p id="splash-tagline">Survive the endless swarm</p>
+      <div id="splash-version">v1.0</div>
+      <div id="splash-buttons">
+        <button id="start-game-btn">START GAME</button>
+        <button id="splash-shop-btn" class="splash-btn">🔧 Shop</button>
+        <button id="splash-leaderboard-btn" class="splash-btn">🏆 Leaderboard</button>
+      </div>
+    </div>
+    <canvas id="game-canvas"></canvas>
+    <div id="hud">
+      <div id="hud-top">
+        <div id="hp-bar-container">
+          <div id="hp-bar"></div>
+          <span id="hp-text">100 / 100</span>
+        </div>
+        <div id="level-info">
+          <span id="level-text">Level 1</span>
+          <div id="xp-bar-container">
+            <div id="xp-bar"></div>
+          </div>
+          <span id="xp-text">0 / 10 XP</span>
+        </div>
+      </div>
+      <div id="hud-bottom">
+        <span id="kill-count">Kills: 0</span>
+        <span id="wave-count">Wave: 1</span>
+        <span id="dps-display">DPS: 0</span>
+        <span id="salvage-display" class="hidden">🔩 0</span>
+      </div>
+      <div id="hud-buttons">
+        <button id="shop-btn" title="Permanent Upgrades">🔧 Shop</button>
+        <button id="stats-btn" title="Stat Breakdown">📊 Stats</button>
+        <button id="leaderboard-btn" title="Leaderboard">🏆 Leaderboard</button>
+        <button id="restart-btn-hud" title="Restart Run">🔄 New Run</button>
+        <button id="main-menu-btn-hud" title="Main Menu">🏠 Menu</button>
+      </div>
+    </div>
+    <div id="upgrade-panel" class="hidden">
+      <h2>Choose an Upgrade</h2>
+      <div id="upgrade-timer">10s</div>
+      <div id="upgrade-options"></div>
+    </div>
+    <div id="game-over" class="hidden">
+      <h1>GAME OVER</h1>
+      <div id="end-stats">
+        <p id="final-stats"></p>
+        <p id="earnings-display"></p>
+      </div>
+      <button id="restart-btn">Next Run</button>
+      <button id="open-shop-btn" class="hidden">Open Shop</button>
+      <button id="open-leaderboard-btn" class="hidden">🏆 Leaderboard</button>
+      <button id="main-menu-btn">Main Menu</button>
+    </div>
+    <div id="shop-panel" class="hidden">
+      <h2>🔧 Permanent Upgrades</h2>
+      <div id="shop-salvage">🔩 Salvage: 0</div>
+      <div id="shop-upgrades"></div>
+      <button id="refund-btn" class="shop-refund-btn">🔄 Refund All</button>
+      <button id="close-shop-btn">Close</button>
+    </div>
+    <div id="stats-panel" class="hidden">
+      <h2>📊 Stat Breakdown</h2>
+      <div id="stats-content"></div>
+      <button id="close-stats-btn">Close</button>
+    </div>
+    <div id="leaderboard-panel" class="hidden">
+      <h2>🏆 Best Runs</h2>
+      <div id="leaderboard-content"></div>
+      <button id="clear-leaderboard-btn" class="lb-clear-btn">🗑️ Clear History</button>
+      <button id="close-leaderboard-btn">Close</button>
+    </div>
+  </div>
+
+  <!-- Game modules -->
+  <script src="utils.js"></script>
+  <script src="entities.js"></script>
+  <script src="save.js"></script>
+  <script src="meta.js"></script>
+  <script src="upgrades.js"></script>
+  <script src="waves.js"></script>
+  <script src="renderer.js"></script>
+  <script src="game.min.js"></script>
+</body>
+</html>
